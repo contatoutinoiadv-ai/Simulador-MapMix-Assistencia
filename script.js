@@ -1,44 +1,122 @@
-const custoTela = document.getElementById('custoTela');
-const custoBateria = document.getElementById('custoBateria');
-const custoConector = document.getElementById('custoConector');
-
-const precoTela = document.getElementById('precoTela');
-const precoBateria = document.getElementById('precoBateria');
-const precoConector = document.getElementById('precoConector');
-const valorTotal = document.getElementById('valorTotal');
-
-function formatarMoeda(valor) {
-  return valor.toLocaleString('pt-BR', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
-
-function calcular() {
-  // Tela: custo + 190%
-  const custoTelaVal = parseFloat(custoTela.value) || 0;
-  const vendaTela = custoTelaVal * 2.90;
-  
-  // Bateria: custo + 190%
-  const custoBateriaVal = parseFloat(custoBateria.value) || 0;
-  const vendaBateria = custoBateriaVal * 2.90;
-  
-  // Conector: custo + 200%
-  const custoConectorVal = parseFloat(custoConector.value) || 0;
-  const vendaConector = custoConectorVal * 3.00;
-  
-  // Atualizar displays
-  precoTela.textContent = `R$ ${formatarMoeda(vendaTela)}`;
-  precoBateria.textContent = `R$ ${formatarMoeda(vendaBateria)}`;
-  precoConector.textContent = `R$ ${formatarMoeda(vendaConector)}`;
-  
-  // Total
-  const total = vendaTela + vendaBateria + vendaConector;
-  valorTotal.textContent = `R$ ${formatarMoeda(total)}`;
+.container {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 }
-
-custoTela.addEventListener('input', calcular);
-custoBateria.addEventListener('input', calcular);
-custoConector.addEventListener('input', calcular);
-
-calcular();
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid #e74c3c;
+}
+h1 { color: #2c3e50; margin-bottom: 5px; font-size: 28px; }
+.brand { color: #e74c3c; font-weight: 700; font-size: 32px; }
+.subtitle { color: #7f8c8d; font-size: 14px; margin-top: 5px; }
+.input-group { margin-bottom: 25px; }
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 14px;
+}
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+input[type="text"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+}
+.service-card {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-left: 4px solid #3498db;
+}
+.service-card.battery { border-left-color: #9b59b6; }
+.service-header { margin-bottom: 10px; }
+.service-name { font-weight: 600; color: #2c3e50; font-size: 15px; }
+.price-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #ddd;
+}
+.price-block {
+  flex: 1;
+  background: white;
+  border-radius: 6px;
+  padding: 8px 10px;
+  border: 1px solid #e0e0e0;
+}
+.price-block-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.price-block-label.avista { color: #27ae60; }
+.price-block-label.aprazo { color: #e74c3c; }
+.price-block-value {
+  font-weight: 700;
+  font-size: 17px;
+}
+.price-block-value.avista { color: #27ae60; }
+.price-block-value.aprazo { color: #e74c3c; }
+.price-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #ddd;
+}
+.price-label { color: #7f8c8d; font-size: 13px; }
+.price-value { color: #27ae60; font-weight: 700; font-size: 18px; }
+.total-box {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  border-radius: 12px;
+  padding: 25px;
+  margin-top: 30px;
+  color: white;
+  text-align: center;
+}
+.total-label {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.total-value { font-size: 42px; font-weight: 700; }
+@media (max-width: 600px) {
+  .container { padding: 25px; }
+  h1 { font-size: 24px; }
+  .brand { font-size: 28px; }
+  .total-value { font-size: 32px; }
+  .price-row { flex-direction: column; }
+}
